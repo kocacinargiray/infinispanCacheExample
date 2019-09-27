@@ -1,0 +1,14 @@
+version: '3'
+services:
+  infinispan-cache:
+    network_mode: host
+    image: infinispan-cache:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/infinispan-cache
+    ports:
+      - "8080:8080"
+    expose:
+      - '8080'

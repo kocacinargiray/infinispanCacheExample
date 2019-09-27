@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: infinispan-server
+  name: infinispan-server-service
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: infinispan-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infinispan-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: infinispan-server
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        name: infinispan-server
+        app: infinispan-server
+    spec:
+      containers:
+      - name: infinispan-server
+        image: kocacnargiray/infinispan-cache:latest
+        resources:
+          requests:
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        - containerPort: 9990
+      imagePullSecrets:
+      - name: infinispansecret
+
