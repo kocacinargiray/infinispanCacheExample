@@ -15,13 +15,13 @@ import com.example.cache.TitleCache;
 public class CacheInitializer implements InitializingBean {
 
 	@Autowired
+	DepartmentsCache deptCache;
+	
+	@Autowired
 	DepartmentEmployeeCache deptEmpCache;
 
 	@Autowired
 	DepartmentManagerCache deptMngCache;
-
-	@Autowired
-	DepartmentsCache deptCache;
 
 	@Autowired
 	EmployeeCache empCache;
@@ -38,9 +38,9 @@ public class CacheInitializer implements InitializingBean {
 	}
 
 	public void init() {
+		deptCache.initializeCache();
 		deptEmpCache.initializeCache();
 		deptMngCache.initializeCache();
-		deptCache.initializeCache();
 		empCache.initializeCache();
 		salaryCache.initializeCache();
 		titleCache.initializeCache();

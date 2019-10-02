@@ -28,15 +28,35 @@ spec:
         name: infinispan-server
         app: infinispan-server
     spec:
+      serviceAccountName: jgroups-kubeping-service-account
       containers:
-      - name: infinispan-server
+      - args:
+        env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        name: infinispan-server
         image: kocacnargiray/infinispan-cache:latest
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 7800
+          protocol: TCP          
+        - containerPort: 8181
+          protocol: TCP
+        - containerPort: 8888
+          protocol: TCP
+        - containerPort: 9990
+          protocol: TCP
+        - containerPort: 11211
+          protocol: TCP
+        - containerPort: 11222
+          protocol: TCP
         resources:
           requests:
             cpu: "500m"
-        ports:
-        - containerPort: 8080
-        - containerPort: 9990
       imagePullSecrets:
       - name: infinispansecret
 

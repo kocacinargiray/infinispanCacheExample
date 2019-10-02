@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import org.infinispan.distribution.group.Group;
 import org.json.JSONObject;
 
 @Embeddable
@@ -35,6 +36,7 @@ public class DepartmentsCompositeKeys implements Serializable {
 	}
 
 	@Override
+	@Group
 	public String toString() {
 		return String.valueOf(empNo) + deptNo;
 	}

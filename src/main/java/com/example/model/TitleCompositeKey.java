@@ -10,6 +10,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.infinispan.distribution.group.Group;
 import org.json.JSONObject;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -54,6 +55,7 @@ public class TitleCompositeKey implements Serializable {
 	}
 
 	@Override
+	@Group
 	public String toString() {
 		DateFormat format = new SimpleDateFormat("yyyymmdd");
 		String date = format.format(fromDate);

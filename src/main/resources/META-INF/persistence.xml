@@ -9,9 +9,10 @@
 		<class>com.example.model.Titles</class>
     	<properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://172.17.0.9:3306/employees"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://172.18.0.6/employees?useSSL=false"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value="secret"/>
+            <property name="hibernate.dialect" value = "org.hibernate.dialect.MySQLDialect"/>
         </properties>
 	</persistence-unit>
 </persistence>

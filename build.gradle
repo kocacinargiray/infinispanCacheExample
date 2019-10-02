@@ -21,22 +21,29 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+configurations {
+  runtime.exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+}
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
 
     // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-
+	
     // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'
     
     //infinispan
     compile 'org.infinispan:infinispan-core'
-    compile 'org.infinispan:infinispan-cachestore-jpa'
+    
+    compile 'org.infinispan:infinispan-commons:9.1.7.Final'
     
     //JSON
     compile 'org.json:json:20160810'
-	
+    
+    compile 'org.jgroups.kubernetes:jgroups-kubernetes:1.0.6.Final'
+
 	//GSON
 	compile 'com.google.code.gson:gson:2.8.5'
     testCompile('org.springframework.boot:spring-boot-starter-test')    

@@ -29,6 +29,10 @@ public class SalariesRepository implements RepositoryInterface {
 		this.emt = em;
 	}
 
+	public SalariesRepository() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public @ResponseBody List<Salaries> findAll() {
 		CriteriaBuilder criteria = emt.getCriteriaBuilder();

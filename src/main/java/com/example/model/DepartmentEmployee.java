@@ -1,7 +1,11 @@
 package com.example.model;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -10,10 +14,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.infinispan.commons.marshall.AdvancedExternalizer;
+import org.infinispan.commons.marshall.SerializeWith;
+import org.infinispan.commons.util.Util;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "dept_emp")
+@SerializeWith(DepartmentEmployee.DeptEmpExternalizer.class)
 public class DepartmentEmployee implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,6 +36,12 @@ public class DepartmentEmployee implements Serializable {
 	public DepartmentEmployee(DepartmentsCompositeKeys dcp) {
 		super();
 		this.cp = dcp;
+	}
+
+	public DepartmentEmployee(DepartmentsCompositeKeys dcp, Date fromDate, Date toDate) {
+		this.cp = dcp;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
 	}
 
 	@Column(name = "from_date", columnDefinition = "DATETIME")
@@ -54,5 +68,35 @@ public class DepartmentEmployee implements Serializable {
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
+	}
+
+	public static class DeptEmpExternalizer implements AdvancedExternalizer<DepartmentEmployee> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void writeObject(ObjectOutput output, DepartmentEmployee deptEmp) throws IOException {
+			output.writeObject(deptEmp.cp);
+			output.writeObject(deptEmp.fromDate);
+			output.writeObject(deptEmp.toDate);
+		}
+
+		@Override
+		public DepartmentEmployee readObject(ObjectInput input) throws IOException, ClassNotFoundException {
+			return new DepartmentEmployee((DepartmentsCompositeKeys) input.readObject(), (Date) input.readObject(),
+					(Date) input.readObject());
+		}
+
+		@Override
+		public Set<Class<? extends DepartmentEmployee>> getTypeClasses() {
+			return Util.<Class<? extends DepartmentEmployee>>asSet(DepartmentEmployee.class);
+		}
+
+		@Override
+		public Integer getId() {
+			return 11;
+		}
 	}
 }

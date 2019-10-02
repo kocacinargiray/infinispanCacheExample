@@ -29,6 +29,10 @@ public class TitlesRepository implements RepositoryInterface {
 		this.emt = em;
 	}
 
+	public TitlesRepository() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public @ResponseBody List<Titles> findAll() {
 		CriteriaBuilder criteria = emt.getCriteriaBuilder();

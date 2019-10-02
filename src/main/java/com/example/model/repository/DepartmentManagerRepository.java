@@ -29,6 +29,10 @@ public class DepartmentManagerRepository implements RepositoryInterface {
 		this.emt = em;
 	}
 
+	public DepartmentManagerRepository() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public @ResponseBody List<DepartmentManager> findAll() {
 		CriteriaBuilder criteria = emt.getCriteriaBuilder();
