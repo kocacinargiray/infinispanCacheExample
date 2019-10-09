@@ -21,6 +21,10 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
 configurations {
   runtime.exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
 }
@@ -37,12 +41,12 @@ dependencies {
     //infinispan
     compile 'org.infinispan:infinispan-core'
     
-    compile 'org.infinispan:infinispan-commons:9.1.7.Final'
-    
     //JSON
     compile 'org.json:json:20160810'
     
     compile 'org.jgroups.kubernetes:jgroups-kubernetes:1.0.6.Final'
+    
+    //providedRuntime "org.infinispan:infinispan-commons:9.1.7.Final"
 
 	//GSON
 	compile 'com.google.code.gson:gson:2.8.5'

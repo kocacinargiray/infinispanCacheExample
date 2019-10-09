@@ -76,6 +76,7 @@ public class Salaries implements Serializable {
 
 		@Override
 		public void writeObject(ObjectOutput output, Salaries salary) throws IOException {
+			System.out.println("Salaries Obje okundu");
 			output.writeObject(salary.cp);
 			output.writeInt(salary.salary);
 			output.writeObject(salary.toDate);
@@ -83,11 +84,13 @@ public class Salaries implements Serializable {
 
 		@Override
 		public Salaries readObject(ObjectInput input) throws IOException, ClassNotFoundException {
+			System.out.println("Salaries Obje yazýldý");
 			return new Salaries((SalariesCompositeKeys) input.readObject(), input.readInt(), (Date) input.readObject());
 		}
 
 		@Override
 		public Set<Class<? extends Salaries>> getTypeClasses() {
+			System.out.println("Salaries Obje");
 			return Util.<Class<? extends Salaries>>asSet(Salaries.class);
 		}
 

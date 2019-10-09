@@ -64,17 +64,20 @@ public class Titles implements Serializable {
 
 		@Override
 		public void writeObject(ObjectOutput output, Titles salary) throws IOException {
+			System.out.println("Titles Obje okundu");
 			output.writeObject(salary.cp);
 			output.writeObject(salary.toDate);
 		}
 
 		@Override
 		public Titles readObject(ObjectInput input) throws IOException, ClassNotFoundException {
+			System.out.println("Titles Obje yazýldý");
 			return new Titles((TitleCompositeKey) input.readObject(), (Date) input.readObject());
 		}
 
 		@Override
 		public Set<Class<? extends Titles>> getTypeClasses() {
+			System.out.println("Titles Obje");
 			return Util.<Class<? extends Titles>>asSet(Titles.class);
 		}
 
