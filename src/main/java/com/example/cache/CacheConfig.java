@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 import com.example.cache.Listener.ClusterListener;
 import com.example.model.DepartmentEmployee;
 import com.example.model.DepartmentManager;
-import com.example.model.Departments;
-import com.example.model.Employees;
 import com.example.model.Salaries;
 import com.example.model.Titles;
 
@@ -28,10 +26,9 @@ public class CacheConfig {
 				.distributedSyncTimeout(60000, TimeUnit.MILLISECONDS).serialization()
 				.addAdvancedExternalizer(new DepartmentEmployee.DeptEmpExternalizer())
 				.addAdvancedExternalizer(new DepartmentManager.DeptMngExternalizer())
-				.addAdvancedExternalizer(new Departments.DeptExternalizer())
 				.addAdvancedExternalizer(new Salaries.SalaryExternalizer())
-				.addAdvancedExternalizer(new Employees.EmpExternalizer())
 				.addAdvancedExternalizer(new Titles.TitleExternalizer());
+
 		ConfigurationBuilder builder = new ConfigurationBuilder();
 		builder.clustering().cacheMode(CacheMode.DIST_SYNC).hash().numOwners(1);
 		cacheManager = new DefaultCacheManager(global.build(), builder.build());

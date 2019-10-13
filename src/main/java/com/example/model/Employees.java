@@ -17,14 +17,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.infinispan.commons.marshall.AdvancedExternalizer;
-import org.infinispan.commons.marshall.SerializeWith;
 import org.infinispan.commons.util.Util;
-import org.infinispan.distribution.group.Group;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "employees")
-@SerializeWith(Employees.EmpExternalizer.class)
+//@SerializeWith(Employees.EmpExternalizer.class)
 public class Employees implements Serializable {
 
 	public enum Gender {
@@ -69,7 +67,6 @@ public class Employees implements Serializable {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date hireDate;
 
-	@Group
 	public int getEmpNo() {
 		return empNo;
 	}
