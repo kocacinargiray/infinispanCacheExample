@@ -1,6 +1,6 @@
 FROM jboss/wildfly
 
-ADD build/libs/cacheExample.war /opt/jboss/wildfly/standalone/deployments/ 
+COPY build/libs/cacheExample.war /opt/jboss/wildfly/standalone/deployments/ 
 
 ENV JAVA_OPTS="-XX:MaxMetaspaceSize=512m -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"
 

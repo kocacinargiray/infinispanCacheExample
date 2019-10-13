@@ -64,20 +64,17 @@ public class Departments implements Serializable {
 
 		@Override
 		public void writeObject(ObjectOutput output, Departments dept) throws IOException {
-			System.out.println("Department Obje okundu.");
 			output.writeUTF(dept.dept_no);
 			output.writeUTF(dept.dept_name);
 		}
 
 		@Override
 		public Departments readObject(ObjectInput input) throws IOException, ClassNotFoundException {
-			System.out.println("Department Obje yazýldý.");
 			return new Departments((String) input.readObject(), (String) input.readObject());
 		}
 
 		@Override
 		public Set<Class<? extends Departments>> getTypeClasses() {
-			System.out.println("Department Obje");
 			return Util.<Class<? extends Departments>>asSet(Departments.class);
 		}
 

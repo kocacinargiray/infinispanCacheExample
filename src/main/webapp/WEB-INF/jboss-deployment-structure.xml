@@ -3,8 +3,11 @@
   <ear-subdeployments-isolated>false</ear-subdeployments-isolated>
   <deployment>
     <dependencies>
-      <module name="org.infinispan" export="true" />
-      <module name="org.infinispan.commons" export="true" />
+      		<module name="org.infinispan" export="true" />
+      		<module name="org.infinispan.commons" export="true" />
     </dependencies>
+    <resources>
+			<resource-root path="lib/infinispan-commons-9.1.7.Final.jar"/>
+	</resources>
   </deployment>
 </jboss-deployment-structure>

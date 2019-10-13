@@ -79,7 +79,6 @@ public class DepartmentManager implements Serializable {
 
 		@Override
 		public void writeObject(ObjectOutput output, DepartmentManager deptMng) throws IOException {
-			System.out.println("DeptMng Obje okundu.");
 			output.writeObject(deptMng.cp);
 			output.writeObject(deptMng.fromDate);
 			output.writeObject(deptMng.toDate);
@@ -87,14 +86,12 @@ public class DepartmentManager implements Serializable {
 
 		@Override
 		public DepartmentManager readObject(ObjectInput input) throws IOException, ClassNotFoundException {
-			System.out.println("DeptMng Obje yazýldý.");
 			return new DepartmentManager((DepartmentsCompositeKeys) input.readObject(), (Date) input.readObject(),
 					(Date) input.readObject());
 		}
 
 		@Override
 		public Set<Class<? extends DepartmentManager>> getTypeClasses() {
-			System.out.println("DepartmentManager Obje");
 			return Util.<Class<? extends DepartmentManager>>asSet(DepartmentManager.class);
 		}
 
