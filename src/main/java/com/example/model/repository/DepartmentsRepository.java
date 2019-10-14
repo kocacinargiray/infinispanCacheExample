@@ -3,7 +3,6 @@ package com.example.model.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -45,47 +44,27 @@ public class DepartmentsRepository implements RepositoryInterface {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void save(Object entity) {
-		EntityTransaction transaction = emt.getTransaction();
-		transaction.begin();
 		emt.persist((Departments) entity);
-		try {
-			transaction.commit();
-		} catch (Exception e) {
-			transaction.rollback();
-		}
+
 	}
 
 	@Override
 	@Transactional(readOnly = false)
 	public void delete(Object entity) {
-		EntityTransaction transaction = emt.getTransaction();
 		Departments department = new Departments();
 		department = emt.find(Departments.class, String.valueOf(entity));
 		if (department != null) {
-			transaction.begin();
 			emt.remove(department);
-			try {
-				transaction.commit();
-			} catch (Exception e) {
-				transaction.rollback();
-			}
 		}
 	}
 
 	@Override
 	@Transactional(readOnly = false)
 	public void update(Object entity) {
-		EntityTransaction transaction = emt.getTransaction();
 		Departments department = new Departments();
 		department = (Departments) entity;
 		if (department != null) {
-			transaction.begin();
 			emt.merge(department);
-			try {
-				transaction.commit();
-			} catch (Exception e) {
-				transaction.rollback();
-			}
 		}
 	}
 
