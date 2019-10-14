@@ -56,6 +56,7 @@ public class DepartmentsRepository implements RepositoryInterface {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void delete(Object entity) {
 		EntityTransaction transaction = emt.getTransaction();
 		Departments department = new Departments();
@@ -72,6 +73,7 @@ public class DepartmentsRepository implements RepositoryInterface {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void update(Object entity) {
 		EntityTransaction transaction = emt.getTransaction();
 		Departments department = new Departments();

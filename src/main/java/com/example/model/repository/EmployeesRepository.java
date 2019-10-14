@@ -54,6 +54,7 @@ public class EmployeesRepository implements RepositoryInterface {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void delete(Object entity) {
 		EntityTransaction transaction = emt.getTransaction();
 		Employees employee = new Employees();
@@ -70,6 +71,7 @@ public class EmployeesRepository implements RepositoryInterface {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void update(Object entity) {
 		EntityTransaction transaction = emt.getTransaction();
 		Employees employee = new Employees();
