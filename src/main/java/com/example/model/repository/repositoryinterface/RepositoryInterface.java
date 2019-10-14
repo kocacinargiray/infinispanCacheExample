@@ -14,4 +14,5 @@ public interface RepositoryInterface {
 
 	public void update(Object entity);
 
+	public Object findId(Object entity);
 }

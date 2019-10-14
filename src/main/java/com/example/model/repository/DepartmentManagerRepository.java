@@ -25,14 +25,6 @@ public class DepartmentManagerRepository implements RepositoryInterface {
 	@PersistenceContext
 	private EntityManager emt;
 
-	public DepartmentManagerRepository(EntityManager em) {
-		this.emt = em;
-	}
-
-	public DepartmentManagerRepository() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public @ResponseBody List<DepartmentManager> findAll() {
 		CriteriaBuilder criteria = emt.getCriteriaBuilder();
@@ -96,5 +88,11 @@ public class DepartmentManagerRepository implements RepositoryInterface {
 				transaction.rollback();
 			}
 		}
+	}
+
+	@Override
+	public Object findId(Object entity) {
+		Object id = emt.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier((DepartmentManager) entity);
+		return id;
 	}
 }

@@ -6,7 +6,7 @@ import org.infinispan.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.cache.Listener.CacheListener;
+import com.example.cache.Listener.TitleCacheListener;
 import com.example.model.Titles;
 import com.example.model.repository.TitlesRepository;
 
@@ -19,9 +19,9 @@ public class TitleCache extends CacheImplementation {
 	Cache<String, Titles> titleCache;
 
 	@Autowired
-	public TitleCache(CacheConfig config) {
+	public TitleCache(CacheConfig config, TitleCacheListener listener) {
 		titleCache = config.cacheManager.getCache("titleCache");
-		titleCache.addListener(new CacheListener());
+		titleCache.addListener(listener);
 	}
 
 	@Override

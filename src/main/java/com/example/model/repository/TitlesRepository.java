@@ -25,14 +25,6 @@ public class TitlesRepository implements RepositoryInterface {
 	@PersistenceContext
 	private EntityManager emt;
 
-	public TitlesRepository(EntityManager em) {
-		this.emt = em;
-	}
-
-	public TitlesRepository() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public @ResponseBody List<Titles> findAll() {
 		CriteriaBuilder criteria = emt.getCriteriaBuilder();
@@ -96,5 +88,11 @@ public class TitlesRepository implements RepositoryInterface {
 				transaction.rollback();
 			}
 		}
+	}
+
+	@Override
+	public Object findId(Object entity) {
+		Object id = emt.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier((Titles) entity);
+		return id;
 	}
 }

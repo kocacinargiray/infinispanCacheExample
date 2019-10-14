@@ -23,14 +23,6 @@ public class EmployeesRepository implements RepositoryInterface {
 	@PersistenceContext
 	private EntityManager emt;
 
-	public EmployeesRepository(EntityManager em) {
-		this.emt = em;
-	}
-
-	public EmployeesRepository() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public List<Employees> findAll() {
 		CriteriaBuilder criteria = emt.getCriteriaBuilder();
@@ -91,6 +83,11 @@ public class EmployeesRepository implements RepositoryInterface {
 				transaction.rollback();
 			}
 		}
+	}
 
+	@Override
+	public Object findId(Object entity) {
+		Object id = emt.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier((Employees) entity);
+		return id;
 	}
 }

@@ -25,14 +25,6 @@ public class SalariesRepository implements RepositoryInterface {
 	@PersistenceContext
 	private EntityManager emt;
 
-	public SalariesRepository(EntityManager em) {
-		this.emt = em;
-	}
-
-	public SalariesRepository() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public @ResponseBody List<Salaries> findAll() {
 		CriteriaBuilder criteria = emt.getCriteriaBuilder();
@@ -95,5 +87,11 @@ public class SalariesRepository implements RepositoryInterface {
 				transaction.rollback();
 			}
 		}
+	}
+
+	@Override
+	public Object findId(Object entity) {
+		Object id = emt.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier((Salaries) entity);
+		return id;
 	}
 }

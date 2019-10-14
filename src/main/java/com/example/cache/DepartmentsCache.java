@@ -6,7 +6,7 @@ import org.infinispan.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.cache.Listener.CacheListener;
+import com.example.cache.Listener.DepartmentCacheListener;
 import com.example.model.Departments;
 import com.example.model.repository.DepartmentsRepository;
 
@@ -19,9 +19,9 @@ public class DepartmentsCache extends CacheImplementation {
 	Cache<String, Departments> deptCache;
 
 	@Autowired
-	public DepartmentsCache(CacheConfig config) {
+	public DepartmentsCache(CacheConfig config, DepartmentCacheListener listener) {
 		deptCache = config.cacheManager.getCache("deptCache");
-		deptCache.addListener(new CacheListener());
+		deptCache.addListener(listener);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import org.infinispan.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.cache.Listener.CacheListener;
+import com.example.cache.Listener.SalariesCacheListener;
 import com.example.model.Salaries;
 import com.example.model.repository.SalariesRepository;
 
@@ -19,9 +19,9 @@ public class SalariesCache extends CacheImplementation {
 	Cache<String, Salaries> salaryCache;
 
 	@Autowired
-	public SalariesCache(CacheConfig config) {
+	public SalariesCache(CacheConfig config, SalariesCacheListener listener) {
 		salaryCache = config.cacheManager.getCache("salaryCache");
-		salaryCache.addListener(new CacheListener());
+		salaryCache.addListener(listener);
 	}
 
 	@Override
